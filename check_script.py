@@ -36,7 +36,7 @@ snapshot_dir = snapshot
 
 ; WebUI 服务监听端口（用于网页查看报告和快照）
 webui_port = 5000
-"""   # ← 新增注释和默认值
+"""  # ← 新增注释和默认值
         with open(CONFIG_PATH, 'w', encoding='utf-8') as f:
             f.write(default_content)
         print(f"[INFO] 已自动生成默认配置文件: {CONFIG_PATH}")
@@ -150,10 +150,10 @@ def main():
     print("  Chivalry 2 战绩每日检查工具")
     print("========================================")
     print(f"使用基准文件: {yesterday_file}")
-
+    
     old_players = read_players_from_txt(yesterday_file)
     print(f"读取到 {len(old_players)} 位玩家")
-
+    
     success_count = 0
     changed_players = []
     failed_count = 0
@@ -169,7 +169,7 @@ def main():
             unchanged_count += 1
             new_players_data.append((nickname, new_level, uid))
             continue
-
+        
         print(f"查询 {nickname} ({uid}) ...")
         new_level = fetch_level(uid)
         time.sleep(SLEEP_SECONDS)
@@ -192,7 +192,7 @@ def main():
                     changed_players.append((nickname, old_level, display_level, display_level - old_level))
                 else:
                     unchanged_count += 1
-
+    
     now_str = datetime.now().strftime('%Y-%m-%d_%H%M%S')
     report_path = os.path.join(REPORT_DIR, f"report_{now_str}.txt")
     with open(report_path, 'w', encoding='utf-8') as report_file:
@@ -208,13 +208,13 @@ def main():
             report_file.write("、".join(names))
         else:
             report_file.write(" 等级发生变化：0 位。")
-
+    
     saved_snapshot = save_snapshot(new_players_data)
     print("========================================")
     print(f"报告已生成: {report_path}")
     print(f"本次快照已保存: {saved_snapshot}")
     print("========================================")
-    print("  执行完毕，按任意键退出...")
+    print("  执行完毕，已自动退出。")
 
 if __name__ == "__main__":
     main()
